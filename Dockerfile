@@ -1,10 +1,9 @@
-FROM python:3.8-alpine
+FROM python:3.9-alpine
 
 # original MAINTAINER Olivier TASSEL <https://github.com/otassel>
 MAINTAINER oldcai <https://github.com/oldcai>
 
 RUN apk update
-RUN apk add 
 RUN apk add --no-cache --virtual .build-deps \
     gcc \
     python3-dev \
