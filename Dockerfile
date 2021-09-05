@@ -1,6 +1,7 @@
 FROM python:3.8-alpine
 
-MAINTAINER Olivier TASSEL <https://github.com/otassel>
+# original MAINTAINER Olivier TASSEL <https://github.com/otassel>
+MAINTAINER oldcai <https://github.com/oldcai>
 
 RUN apk update
 RUN apk add 
