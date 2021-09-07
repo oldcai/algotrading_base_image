@@ -1,20 +1,7 @@
-FROM python:3.9-alpine
+FROM python:3.9
 
 # original MAINTAINER Olivier TASSEL <https://github.com/otassel>
 MAINTAINER oldcai <https://github.com/oldcai>
-
-RUN apk update
-RUN apk add --no-cache --virtual .build-deps \
-    gcc \
-    python3-dev \
-    musl-dev \
-    postgresql-dev \
-    musl-dev wget git build-base
-# Numpy
-RUN pip install --no-cache-dir psycopg2 cython
-RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
-RUN pip install numpy
-    
 
 # TA-Lib
 RUN wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && \
@@ -23,8 +10,10 @@ RUN wget http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz && \
   ./configure --prefix=/usr && \
   make && \
   make install
-RUN git clone https://github.com/mrjbq7/ta-lib.git /ta-lib-py && cd ta-lib-py && python setup.py install
 
-#RUN apk del musl-dev wget git build-base
+RUN rm -R ta-lib ta-lib-0.4.0-src.tar.gz
 
-RUN apk del --no-cache .build-deps
+WORKDIR /base_image/
+ADD . /base_image/
+RUN pip install -r requirements.txt
+RUN rm -rf /base_image/
