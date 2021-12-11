@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM python:3.10.0b4
 
 # original MAINTAINER Olivier TASSEL <https://github.com/otassel>
 MAINTAINER oldcai <https://github.com/oldcai>
